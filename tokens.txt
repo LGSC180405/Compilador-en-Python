@@ -1,0 +1,17 @@
+tablas de tokens
+
+//token numerico, lexema, token lexico;
+palabras resevadas {
+100, 
+
+
+
+}
+
+tokens {
+1, en
+}
+
+Reglas lexicas
+
+numero
