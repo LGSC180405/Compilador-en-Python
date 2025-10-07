@@ -107,7 +107,7 @@ with open("tokens_numero.txt", "w") as salida:
 
 # Guardar errores si existen
 if errores_encontrados:
-    with open("errores.txt", "w") as f:
+    with open("destacables.txt", "w") as f:
         for error in errores_encontrados:
             f.write(error + "\n")
         f.write(f"\nTotal de errores léxicos: {len(errores_encontrados)}\n")
