@@ -1,0 +1,24 @@
+// Programa de prueba léxica
+int numero = 10;
+float promedio = 3.14;
+string mensaje = "Hola mundo!";
+
+/* Bucle de ejemplo */
+while (numero > 0) {
+    numero = numero - 1;
+    promedio = promedio + 0.5;
+    mensaje = "Iteración: " + numero;
+}
+
+if (promedio >= 5.0) {
+    print(mensaje);
+} else {
+    print("Promedio bajo");
+}
+
+// Caso de error (identificador inválido con doble guion bajo)
+variable__invalida = 123;
+
+// Constantes en notación científica
+c = 1.23e+10;
+d = -4.5E-3;
