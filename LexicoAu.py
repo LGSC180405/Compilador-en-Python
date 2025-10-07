@@ -103,7 +103,7 @@ with open("tokens_numero.txt", "w") as salida:
         tok = lexer.token()
         if not tok:
             break
-        salida.write(f"{tok.value}\n")
+        salida.write(f"{tok.type}\n")
 
 # Guardar errores si existen
 if errores_encontrados:
