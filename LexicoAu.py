@@ -22,6 +22,9 @@ tokens = [
     'COMMENT'
 ] + list(set(reserved.values()))
 
+# Asignar número único a cada tipo de token
+codigo_tokens = {token: idx + 1 for idx, token in enumerate(tokens)}
+
 # Reglas de expresiones regulares
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
@@ -96,14 +99,16 @@ with open("tokens_generados.txt", "w") as salida:
             break
         salida.write(f"{tok.type}: {tok.value} (línea {tok.lineno})\n")
 
-# Segunda pasada: solo valores
+# Segunda pasada: guardar número asociado a cada tipo de token
 lexer.input(codigo)
 with open("tokens_numero.txt", "w") as salida:
     while True:
         tok = lexer.token()
         if not tok:
             break
-        salida.write(f"{tok.type}\n")
+        numero = codigo_tokens.get(tok.type, -1)
+        salida.write(f"{numero}\n")
+
 
 # Guardar errores si existen
 if errores_encontrados:
