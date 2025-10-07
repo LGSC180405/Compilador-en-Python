@@ -1,0 +1,21 @@
+// Programa con errores léxicos
+int numero = 10;
+float promedio = 3.14;
+string mensaje = "Hola mundo!";
+
+/* Error en identificador (doble guion bajo) */
+variable__invalida = 123;
+
+/* Error en número mal formado */
+x = 12.34.56;
+
+/* Error: cadena sin cerrar */
+y = "Texto sin cierre;
+
+/* Bucle de ejemplo con token inválido */
+while (numero > 0) {
+    numero = numero - 1;
+    promedio = promedio + 0.5;
+    mensaje = "Iteración " + numero;
+    #token_invalido
+}
