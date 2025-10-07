@@ -1,17 +1,17 @@
-tablas de tokens
-
-//token numerico, lexema, token lexico;
-palabras resevadas {
-100, 
-
-
-
-}
-
-tokens {
-1, en
-}
-
-Reglas lexicas
-
-numero
+100 if
+101 else
+102 for
+103 while
+104 do
+105 char
+106 int
+107 float
+108 return
+109 void
+110 break
+111 case
+112 main
+113 sizeof
+114 const
+115 continue
+116 switch
