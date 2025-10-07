@@ -1,4 +1,3 @@
-
 import ply.lex as lex
 
 # Cargar palabras reservadas desde archivo
@@ -83,3 +82,19 @@ def t_error(t):
 
 # Construir el lexer
 lexer = lex.lex()
+
+# Leer el contenido del archivo fuente
+with open("codigo_fuente.txt", "r") as archivo:
+    codigo = archivo.read()
+
+# Enviar el contenido al lexer
+lexer.input(codigo)
+
+# Analizar y mostrar los tokens
+with open("tokens_generados.txt", "w") as salida:
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(f"{tok.type}: {tok.value} (línea {tok.lineno})")
+        salida.write(f"{tok.type}: {tok.value} (línea {tok.lineno})\n")
