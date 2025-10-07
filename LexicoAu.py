@@ -43,7 +43,7 @@ t_RBRACE  = r'\}'
 # Comentarios
 def t_COMMENT(t):
     r'\/\/.*|\/\*[\s\S]*?\*\/'
-    pass  # Ignorar comentarios
+    pass
 
 # Cadenas
 def t_STRING_CONST(t):
@@ -58,7 +58,7 @@ def t_ID(t):
 
 # Números
 def t_FLOAT_CONST(t):
-    r'[+-]?(\d+\.\d+([eE][+-]?\d+)?|\d+[eE][+-]?\d+)'
+    r'[+-]?((\d+\.\d*|\.\d+)([eE][+-]?\d+)?|\d+[eE][+-]?\d+)'
     return t
 
 def t_INT_CONST(t):
@@ -74,10 +74,10 @@ def t_newline(t):
 t_ignore = ' \t'
 
 # Errores
+errores_encontrados = []
+
 def t_error(t):
-    print(f"Error léxico: {t.value} en línea {t.lineno}")
-    with open("errores.txt", "a") as f:
-        f.write(f"Error léxico: {t.value} en línea {t.lineno}\n")
+    errores_encontrados.append(f"{t.lineno}: {t.value}")
     t.lexer.skip(1)
 
 # Construir el lexer
@@ -87,14 +87,27 @@ lexer = lex.lex()
 with open("codigo_fuente.txt", "r") as archivo:
     codigo = archivo.read()
 
-# Enviar el contenido al lexer
+# Primera pasada: tokens con tipo y línea
 lexer.input(codigo)
-
-# Analizar y mostrar los tokens
 with open("tokens_generados.txt", "w") as salida:
     while True:
         tok = lexer.token()
         if not tok:
             break
-        print(f"{tok.type}: {tok.value} (línea {tok.lineno})")
         salida.write(f"{tok.type}: {tok.value} (línea {tok.lineno})\n")
+
+# Segunda pasada: solo valores
+lexer.input(codigo)
+with open("tokens_numero.txt", "w") as salida:
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        salida.write(f"{tok.value}\n")
+
+# Guardar errores si existen
+if errores_encontrados:
+    with open("errores.txt", "w") as f:
+        for error in errores_encontrados:
+            f.write(error + "\n")
+        f.write(f"\nTotal de errores léxicos: {len(errores_encontrados)}\n")
